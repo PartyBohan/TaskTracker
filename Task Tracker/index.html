@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labubu To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="labubu-title">
+                <span class="labubu-emoji-fallback">🐰</span>
+                Labubu To-Do List
+                <span class="labubu-emoji-fallback">🐰</span>
+            </h1>
+            <div class="progress-section">
+                <div class="progress-bar-container">
+                    <label>Overall Progress (30 Days)</label>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="overall-progress"></div>
+                    </div>
+                    <span class="progress-text" id="overall-progress-text">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <label>Today's Progress</label>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="daily-progress"></div>
+                    </div>
+                    <span class="progress-text" id="daily-progress-text">0%</span>
+                </div>
+            </div>
+            <div class="streak-info">
+                <span>🔥 Streak: <span id="streak-days">0</span> days</span>
+                <span>📅 Day: <span id="current-day">1</span>/30</span>
+            </div>
+            <div class="data-management">
+                <button id="export-btn" class="data-btn">💾 Export Data</button>
+                <button id="import-btn" class="data-btn">📥 Import Data</button>
+                <input type="file" id="import-file" accept=".json" style="display: none;">
+                <div class="sync-status" id="sync-status">
+                    <span id="sync-indicator">🔄</span>
+                    <span id="sync-text">Syncing...</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="routine-section">
+            <div class="routine-header">
+                <h3>📋 Daily Routine</h3>
+                <button id="manage-routine-btn" class="routine-btn">⚙️ Manage Routine</button>
+            </div>
+            <button id="apply-routine-btn" class="labubu-btn apply-routine-btn">✨ Apply Routine to Today</button>
+        </div>
+
+        <div id="routine-manager" class="routine-manager hidden">
+            <div class="routine-manager-header">
+                <h3>Create Your Daily Routine</h3>
+                <button id="close-routine-btn" class="close-btn">×</button>
+            </div>
+            <div class="routine-input-section">
+                <input type="text" id="routine-task-input" placeholder="Add routine task... 🐰" />
+                <input type="time" id="routine-task-time" />
+                <button id="add-routine-task-btn" class="labubu-btn">➕ Add to Routine</button>
+            </div>
+            <div class="routine-tasks-list">
+                <h4>Your Routine Tasks:</h4>
+                <ul id="routine-tasks-list"></ul>
+            </div>
+            <div class="routine-actions">
+                <button id="save-routine-btn" class="labubu-btn">💾 Save Routine</button>
+                <button id="clear-routine-btn" class="routine-btn danger">🗑️ Clear Routine</button>
+            </div>
+        </div>
+
+        <div class="task-input-section">
+            <input type="text" id="task-input" placeholder="Add a new task... 🐰" />
+            <input type="date" id="task-date" />
+            <input type="time" id="task-time" />
+            <button id="add-task-btn" class="labubu-btn">➕ Add Task</button>
+        </div>
+
+        <div class="tasks-container">
+            <h2>Today's Tasks 🎯</h2>
+            <ul id="tasks-list"></ul>
+        </div>
+
+        <div id="labubu-celebration" class="labubu-celebration hidden">
+            <div class="labubu-smile">
+                <span class="labubu-emoji-fallback">🐰✨</span>
+            </div>
+            <p>Amazing! All tasks completed! 🎉</p>
+        </div>
+    </div>
+
+    <canvas id="fireworks-canvas"></canvas>
+
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
